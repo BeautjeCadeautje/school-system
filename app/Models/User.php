@@ -58,4 +58,55 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    /**
+     * Check if the user has a specific role.
+     *
+     * @param string $roleName
+     * @return bool
+     */
+    public function hasRole(string $roleName): bool
+    {
+        return $this->role && $this->role->name === $roleName;
+    }
+
+    /**
+     * Check if the user is an administrator.
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('Administrator');
+    }
+
+    /**
+     * Check if the user is a teacher.
+     *
+     * @return bool
+     */
+    public function isTeacher(): bool
+    {
+        return $this->hasRole('Teacher');
+    }
+
+    /**
+     * Check if the user is a parent.
+     *
+     * @return bool
+     */
+    public function isParent(): bool
+    {
+        return $this->hasRole('Parent');
+    }
+
+    /**
+     * Check if the user is a student.
+     *
+     * @return bool
+     */
+    public function isStudent(): bool
+    {
+        return $this->hasRole('Student');
+    }
 }
